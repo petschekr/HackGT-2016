@@ -25,9 +25,6 @@ app.use(cookieParser(
     common.cookieOptions
 ));
 
-// RethinkDB database
-import r = require("rethinkdb");
-
 app.use("/css", serveStatic("public/css"));
 app.use("/img", serveStatic("public/img"));
 

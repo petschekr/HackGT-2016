@@ -29,6 +29,15 @@ export var cookieOptions = {
 	"signed": true
 };
 
+// RethinkDB database
+import r = require("rethinkdb");
+var connection: r.Connection | null = null;
+r.connect( {host: "localhost", port: 28015}, function(err, conn) {
+    if (err) throw err;
+    connection = conn;
+	console.info("Connected to RethinkDB instance");
+});
+
 //var dbRaw = new neo4j.GraphDatabase(`http://${keys.neo4j.username}:${keys.neo4j.password}@${keys.neo4j.server}:7474`);
 //export var db = Promise.promisifyAll(dbRaw);
 /*export var authenticateMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction): void {

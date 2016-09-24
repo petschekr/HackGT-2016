@@ -39,3 +39,4 @@ jspm_packages
 server.js
 keys.json
 common.js
+routes/*.js
