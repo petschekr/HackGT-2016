@@ -80,7 +80,7 @@ limitations under the License
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">PanID</span>
                 <div class="mdl-layout-spacer"></div>
@@ -100,11 +100,11 @@ limitations under the License
                     <h2 class="mdl-card__title-text">Log in</h2>
                 </div>
                 <form action="#">
-                    <div class="mdl-textfield mdl-js-textfield mdl-cell">
+                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="text" id="userName">
                         <label class="mdl-textfield__label" for="userName">Username</label>
                     </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-cell">
+                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="password" id="password">
                         <label class="mdl-textfield__label" for="password">Password</label>
                     </div>
@@ -119,5 +119,7 @@ limitations under the License
         </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="js/scrypt.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>
