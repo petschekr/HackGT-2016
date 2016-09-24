@@ -28,6 +28,10 @@ app.use(cookieParser(
 app.use("/css", serveStatic("public/css"));
 app.use("/img", serveStatic("public/img"));
 
+// Routes
+import userRouter = require("./routes/user");
+app.use("/api/user", userRouter);
+
 app.route("/").get(function (request, response) {
 	fs.readFile("pages/index.html", "utf8", function(err, html) {
         if (err) {
