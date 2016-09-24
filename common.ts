@@ -12,6 +12,12 @@ import express = require("express");
 
 export interface User {
 	"username": String;
+	"login": {
+		"hash": string;
+		"rounds": number;
+		"digest": string;
+		"salt": string;
+	};
 }
 export var keys: {
 	"rethinkdb": {
@@ -31,39 +37,46 @@ export var cookieOptions = {
 
 // RethinkDB database
 import r = require("rethinkdb");
-var connection: r.Connection | null = null;
-r.connect( {host: "localhost", port: 28015}, function(err, conn) {
+export var db: r.Connection | null = null;
+r.connect( {host: "localhost", port: 28015, db: "PanID"}, function(err, conn) {
     if (err) throw err;
-    connection = conn;
+    db = conn;
 	console.info("Connected to RethinkDB instance");
 });
 
 //var dbRaw = new neo4j.GraphDatabase(`http://${keys.neo4j.username}:${keys.neo4j.password}@${keys.neo4j.server}:7474`);
 //export var db = Promise.promisifyAll(dbRaw);
-/*export var authenticateMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction): void {
-	var username = request.signedCookies.username || "";
-	db.cypherAsync({
-		query: "MATCH (user:User {username: {username}}) RETURN user",
-		params: {
-			username: username
-		}
-	}).then(function (results) {
-		var user = null;
-		var loggedIn: boolean;
-		if (results.length < 1) {
-			// Username not found in database
-			loggedIn = false;
-		}
-		else {
-			user = results[0].user.properties;
-			user.admin = !!user.admin; // Could be true or null
-			loggedIn = true;
-		}
-		response.locals.authenticated = loggedIn;
-		response.locals.user = user;
+export var authenticateMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction): void {
+	if (db === null) {
+		response.locals.authenticated = false;
 		next();
-	}).catch(handleError.bind(response));
-};*/
+		return;
+	}
+	var username = request.signedCookies.username || "";
+	
+	r.table("users").filter({username: username}).run(db, function(err, cursor) {
+        if (err) throw err;
+		cursor.toArray(function (err, results) {
+			if (err) throw err;
+			console.log(results);
+
+			var user: any = {};
+			var loggedIn: boolean;
+			if (results.length < 1) {
+				// Username not found in database
+				loggedIn = false;
+			}
+			else {
+				user = results[0].user.properties;
+				user.admin = !!user.admin; // Could be true or null
+				loggedIn = true;
+			}
+			response.locals.authenticated = loggedIn;
+			response.locals.user = user;
+			next();
+		});
+    });
+};
 
 /*var pusher = require("pushbullet");
 pusher = Promise.promisifyAll(new pusher(keys.pushbullet));
