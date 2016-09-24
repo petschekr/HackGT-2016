@@ -143,21 +143,27 @@
                         <label class="mdl-textfield__label" for="username">Username</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="userPassword">
-                        <label class="mdl-textfield__label" for="userPassword">Enter Password</label>
+                        <input class="mdl-textfield__input" type="password" id="password">
+                        <label class="mdl-textfield__label" for="password">Password</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="password" id="confirmPassword">
-                        <label class="mdl-textfield__label" for="userPassword" >Confirm Password</label>
+                        <label class="mdl-textfield__label" for="confirmPassword" >Confirm Password</label>
                     </div>
-                    <br>Note: Due to how we secure your information, it is impossible to retrieve a lost password. Please keep your password in a safe place.
+                    <br>
+                    <div style="margin: 10px 16px;">
+                        Due to how your information is secured, it is impossible to reset a lost password. Please keep your password in a safe place.
+                    </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="Submit" href="new-user-form.html"> Submit</a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit"> Submit</a>
                     </div>
             </div>
 
         </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="js/elliptic.min.js"></script>
+    <script src="js/scrypt.js"></script>
+    <script src="js/new-user.js"></script>
   </body>
 </html>
