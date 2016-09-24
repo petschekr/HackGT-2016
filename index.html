@@ -49,23 +49,35 @@ limitations under the License
 <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css">
 <link rel="stylesheet" href="styles.css">
 <style>
-
-#view-source {
-    position: fixed;
-    display: block;
-    right: 0;
-    bottom: 0;
-    margin-right: 40px;
-    margin-bottom: 40px;
-    z-index: 900;
-}
+    #view-source {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        z-index: 900;
+    }
+    #login-box {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #login-box .mdl-textfield {
+        display: block;
+        padding: 20px 0;
+        margin: -20px 16px;
+        width: 90%;
+    }
+    #login-box .mdl-textfield:last-of-type {
+        margin-bottom: 0;
+    }
 </style>
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">Welcome to PanID</span>
+                <span class="mdl-layout-title">PanID</span>
                 <div class="mdl-layout-spacer"></div>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
                     <i class="material-icons">more_vert</i>
@@ -79,14 +91,14 @@ limitations under the License
         </header>
 
         <main class="mdl-layout__content mdl-color--grey-100">
-            <div class="mdl-card mdl-shadow--3dp mdl-cell">
+            <div class="mdl-card mdl-shadow--2dp mdl-cell" id="login-box">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">Login</h2>
                 </div>
                 <form action="#">
                     <div class="mdl-textfield mdl-js-textfield mdl-cell">
                         <input class="mdl-textfield__input" type="text" id="sample1">
-                        <label class="mdl-textfield__label" for="sample1">User name</label>
+                        <label class="mdl-textfield__label" for="sample1">Username</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-cell">
                         <input class="mdl-textfield__input" type="password" id="sample2">
@@ -94,14 +106,10 @@ limitations under the License
                     </div>
                 </form>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Login
-                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Login</a>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Create Account
-                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Create Account</a>
                 </div>
             </div>
         </main>
