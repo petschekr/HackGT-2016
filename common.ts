@@ -15,6 +15,7 @@ export interface User {
 	// When signing up, the user signs their username with their private key
 	// The signature and their public key are then sent to the server
 	// The server verifies their message
+	"salt": string;
 	"publicKey": string;
 	"ephemPublicKey": string;
 	"data": string;
@@ -65,8 +66,7 @@ export var authenticateMiddleware = function (request: express.Request, response
 				loggedIn = false;
 			}
 			else {
-				user = results[0].user.properties;
-				user.admin = !!user.admin; // Could be true or null
+				user = results[0];
 				loggedIn = true;
 			}
 			response.locals.authenticated = loggedIn;

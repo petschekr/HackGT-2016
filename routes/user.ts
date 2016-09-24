@@ -26,10 +26,34 @@ router.route("/").get(common.authenticateMiddleware, function (request, response
         });
     }
 });
+router.route("/getsalt/:username").get(function (request, response) {
+    var username = request.params.username.toString();
+    r.table("users").filter({username: username}).run(common.db, function(err, cursor) {
+        if (err) throw err;
+		cursor.toArray(function (err, results) {
+			if (err) throw err;
+			
+			var user: any = {};
+			var loggedIn: boolean;
+            var salt: string;
+			if (results.length < 1) {
+				// Username not found in database, return random salt
+				salt = crypto.randomBytes(16).toString("hex");
+			}
+			else {
+				// Pull the user's salt from the database for them to log in
+                salt = results[0].salt;
+			}
+            response.json({ "salt": salt });
+		});
+    });
+});
 router.route("/join").post(postParser, function (request, response) {
     var username = request.body.username.toString().trim();
     var publicKey = Buffer.from(request.body.publicKey.toString(), "hex");
     var signature = Buffer.from(request.body.signature.toString(), "hex");
+    // Save the salt that the user used to derive their private key
+    var salt = request.body.salt.toString();
     if (!username || !publicKey || !signature) {
         response.status(400).send({
            "error": "Missing username, public key, or signature"
@@ -58,6 +82,7 @@ router.route("/join").post(postParser, function (request, response) {
 
     var user: User = {
         username: username,
+        salt: salt,
         publicKey: publicKey.toString("hex"),
         ephemPublicKey: publicKey.toString("hex"),
         data: encryptedData
