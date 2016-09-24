@@ -35,3 +35,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+server.js
+keys.json
+common.js
+routes/*.js
