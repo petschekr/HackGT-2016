@@ -28,6 +28,10 @@ app.use(cookieParser(
 app.use("/css", serveStatic("public/css"));
 app.use("/img", serveStatic("public/img"));
 
+// Routes
+import userRouter = require("./routes/user");
+app.use("/api/user", userRouter);
+
 app.route("/").get(function (request, response) {
 	fs.readFile("pages/index.html", "utf8", function(err, html) {
         if (err) {
@@ -41,8 +45,8 @@ app.route("/").get(function (request, response) {
 // 404 page
 app.use(/*common.authenticateMiddleware,*/ function (request, response, next) {
 	console.info(`Handled 404 for ${request.url} (${request.method}) (${request.ip}) at ${new Date().toString()}`);
-	//response.status(404).send("404 Not found!");
-	fs.readFile("pages/404.html", "utf8", function (err, html) {
+	response.status(404).send("404 Not found!");
+	/*fs.readFile("pages/404.html", "utf8", function (err, html) {
         if (err) {
             common.handleError.bind(response);
             return;
@@ -50,14 +54,14 @@ app.use(/*common.authenticateMiddleware,*/ function (request, response, next) {
         var $ = cheerio.load(html);
         $("#url").text(request.url);
         response.status(404).send($.html());
-    });
+    });*/
 });
 // Generic error handling
 app.use(function (err: Error, request, response, next) {
 	common.handleError.bind(response)(err);
 });
 
-const PORT = 8080;
+const PORT = 80;
 
 // Set up the Socket.io server
 var server = http.createServer(app).listen(PORT, "0.0.0.0", 511, function () {
