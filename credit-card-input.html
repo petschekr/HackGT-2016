@@ -48,21 +48,39 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
+   <style>
+      #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+      }
+      #text-box {
+          margin-right: auto;
+          margin-left: auto;
+      }
+      #text-box .mdl-textfield {
+          display: block;
+          padding: 20px 0;
+          margin: -20px 16px;
+          width: 90%;
+      }
+      #text-box .mdl-textfield:last-of-type {
+          margin-bottom: 0;
+      }
+      #text-box .mdl-button {
+          width: 90%;
+          display: block;
+          margin: 0 auto;
+      }
     </style>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+      <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Add a Credit Card</span>
           <div class="mdl-layout-spacer"></div>
@@ -103,28 +121,43 @@
             <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
           </nav>
       </div>
-
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-            
-            <form>
-              Select your credit card:<br>
-              <input type="radio" name="cctype" value="skymiles" checked> SkyMiles Card<br>
-              <input type="radio" name="cctype" value="visa"> Visa<br>
-              <input type="radio" name="cctype" value="amex"> American Express<br>
-              <input type="radio" name="cctype" value="mastercard"> Mastercard<br><br>
-              Credit Card Number:<br>
-              <input type="text" name="ccnum"><br>
-              Name on Card:<br>
-              <input type="text" name="ccname"><br>
-              Expiration Date:<br>
-              <input type="month" name="ccexpiration"><br>
-              CVV2:<br>
-              <input type="text" name="cvv2"><br><br>
-              <input type="submit" value="Submit">
-              <button><a href="new-user-form.html">Back</a></button><br>
-            </form>
-        </div>
+            <div class="mdl-card mdl-cell mdl-shadow--3dp" id="text-box" >
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Input your credit card</h2>
+                </div>
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label class="mdl-textfield__label">Select Card Type</label> <br>
+                        <input type="radio" name="ccType" value="skyMiles" checked> SkyMiles Card <br>                      
+                        <input type="radio" name="ccType" value="visa"> Visa <br>         
+                        <input type="radio" name="ccType" value="masterCard"> Master Card <br>
+                        <input type="radio" name="ccType" value="amEx"> American Express <br>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="ccName">
+                        <label class="mdl-textfield__label" for="ccName">Name on Card</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="ccNum">
+                        <label class="mdl-textfield__label" for="ccNum" >Credit Card Number</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="month" id="ccExpiration">
+                        <label class="mdl-textfield__label" for="ccExpiration">Expiration Date</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="email" id="email">
+                        <label class="mdl-textfield__label" for="email">Email Address</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="ccCVV2">
+                        <label class="mdl-textfield__label" for="ccCVV2">CVV2</label>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit"> Submit</a>
+                    </div>
+                </form>
       </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
