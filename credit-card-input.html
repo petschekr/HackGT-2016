@@ -64,17 +64,8 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Welcome to PanID</span>
+          <span class="mdl-layout-title">Add a Credit Card</span>
           <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search">
-              <label class="mdl-textfield__label" for="search">Enter your query...</label>
-            </div>
-          </div>
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
             <i class="material-icons">more_vert</i>
           </button>
@@ -88,7 +79,23 @@
 
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-            <!--> THIS IS WHERE WE PUT CONTENT SHIT </!-->
+            
+            <form>
+              Select your credit card:<br>
+              <input type="radio" name="cctype" value="visa" checked> Visa<br>
+              <input type="radio" name="cctype" value="amex"> American Express<br>
+              <input type="radio" name="cctype" value="mastercard"> Mastercard<br>
+              <input type="radio" name="cctype" value="skymiles"> SkyMiles Card<br><br>
+              Credit Card Number:<br>
+              <input type="text" name="ccnum"><br>
+              Name on Card:<br>
+              <input type="text" name="ccname"><br>
+              Expiration Date:<br>
+              <input type="month" name="ccexpiration"><br>
+              CVV2:<br>
+              <input type="text" name="cvv2"><br><br>
+              <input type="submit" value="Submit">
+            </form>
         </div>
       </main>
     </div>
