@@ -71,11 +71,16 @@ limitations under the License
 #text-box .mdl-textfield:last-of-type {
     margin-bottom: 0;
 }
+#text-box .mdl-button {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
 </style>
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">Please Input Your User Information</span>
                 <div class="mdl-layout-spacer"></div>
@@ -109,24 +114,30 @@ limitations under the License
                         <input class="mdl-textfield__input" pattern=""type="date" id="DoB">
                         <label class="mdl-textfield__label" for="DoB" >Date of Birth</label>
                     </div>
-                    Legal First Name:<br>
-                    <input type="text" name="firstname"><br>
-                    Last Name: <br>
-                    <input type="text" name="lastname"><br>
-                    Date of Birth (mm/dd/yyyy): <br>
-                    <input type="date" name="dob"><br>
-                    Phone Number:<br>
-                    <input type="tel" name="usertelephone"><br>
-                    Email Address:<br>
-                    <input type="email" name="useremail"><br>
-                    Delta Skymiles Number:<br>
-                    <input type="text" name="skymiles"><br>
-                    TSA PreCheck Known Traveler Number:<br>
-                    <input type="text" name="ktn"><br><br>
-                    <button><a href="credit-card-input.html">Add a Credit Card</a></button><br><br>
-                    <button><a href="passport-input.html">Add Passport Info</a></button><br>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="tel" id="phone">
+                        <label class="mdl-textfield__label" for="phone">Phone Number</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="email" id="email">
+                        <label class="mdl-textfield__label" for="email">Email Address</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="deltaNum">
+                        <label class="mdl-textfield__label" for="deltaNum">Delta Skymiles Number</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="TsaNum">
+                        <label class="mdl-textfield__label" for="TsaNum">TSA PreCheck Known Traveler Number</label>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit" href=create-user-account.html>Submit</a>
+                    </div>
+
                 </form>
             </div>
+            <button><a href="credit-card-input.html">Add a Credit Card</a></button><br><br>
+            <button><a href="passport-input.html">Add Passport Info</a></button><br>
 
         </main>
 <!-- =======
@@ -225,7 +236,7 @@ limitations under the License
             </g>
         </defs>
     </svg>
-    <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
+
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </body>
 </html>
