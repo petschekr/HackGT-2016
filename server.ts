@@ -51,6 +51,15 @@ app.route("/join").get(function (request, response) {
         response.send(html);
     });
 });
+app.route("/setup").get(function (request, response) {
+    fs.readFile("pages/new-user-form.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
 // Hack because I'm too lazy to put this in css/
 app.route("/styles.css").get(function (request, response) {
 	fs.readFile("styles.css", "utf8", function(err, css) {
