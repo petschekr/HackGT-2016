@@ -86,6 +86,52 @@ app.route("/dashboard").get(function (request, response) {
         response.send(html);
     });
 });
+// Standard pages
+app.route("/credit-card-input").get(function (request, response) {
+	fs.readFile("pages/credit-card-input.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+app.route("/passport-input").get(function (request, response) {
+	fs.readFile("pages/passport-input.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+app.route("/address-input-form").get(function (request, response) {
+	fs.readFile("pages/address-input-form.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+app.route("/payroll").get(function (request, response) {
+	fs.readFile("pages/payroll.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+app.route("/authorize").get(function (request, response) {
+	fs.readFile("pages/authorize-transmission.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
 
 // Hack because I'm too lazy to put this in css/
 app.route("/styles.css").get(function (request, response) {
