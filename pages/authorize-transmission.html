@@ -119,12 +119,12 @@
             </div>
             <form action="#">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="transPwd">
-                    <label class="mdl-textfield__label" for="transPwd">Password</label><br>
+                    <input class="mdl-textfield__input" type="text" id="password">
+                    <label class="mdl-textfield__label" for="password">Password</label><br>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="transPubKey">
-                    <label class="mdl-textfield__label" for="transPubKey" >Employer Public Key</label><br>
+                    <input class="mdl-textfield__input" type="text" id="public-key">
+                    <label class="mdl-textfield__label" for="public-key" >Employer Public Key</label><br>
                 </div>
             </form>
             <div class="mdl-card__actions mdl-card--border">
@@ -134,5 +134,8 @@
     </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="js/elliptic.min.js"></script>
+    <script src="js/scrypt.js"></script>
+    <script src="js/authorize.js"></script>
   </body>
 </html>
