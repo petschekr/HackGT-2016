@@ -48,6 +48,45 @@ router.route("/getsalt/:username").get(function (request, response) {
 		});
     });
 });
+router.route("/login").post(postParser, function (request, response) {
+    response.clearCookie("username");
+    var username = request.body.username.toString().trim();
+    var publicKey = Buffer.from(request.body.publicKey.toString(), "hex");
+    var signature = Buffer.from(request.body.signature.toString(), "hex");
+    
+    if (!username || !publicKey || !signature) {
+        response.status(400).send({
+           "error": "Missing username, public key, or signature"
+        });
+        return;
+    }
+    r.table("users").filter({username: username}).run(common.db, function(err, cursor) {
+        if (err) throw err;
+		cursor.toArray(function (err, results) {
+			if (err) throw err;
+            if (results.length === 0) {
+                response.status(400).send({
+                    "error": "Username not found"
+                });
+                return;
+            }
+            
+            // Verify signature
+            var publicKeyPair = ec.keyFromPublic(publicKey, "hex");
+            var signedData = crypto.createHash("sha256").update(username).digest();
+            if (!publicKeyPair.verify(signedData, signature)) {
+                response.status(400).send({
+                    "error": "Invalid signature"
+                });
+                return;
+            }
+            response.cookie("username", username, common.cookieOptions);
+            response.send({
+                "success": true
+            });
+        });
+    });
+});
 router.route("/join").post(postParser, function (request, response) {
     var username = request.body.username.toString().trim();
     var publicKey = Buffer.from(request.body.publicKey.toString(), "hex");
