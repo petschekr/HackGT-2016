@@ -68,6 +68,16 @@ app.route("/setup").get(common.authenticateMiddleware, function (request, respon
         response.send(html);
     });
 });
+app.route("/employer").get(function (request, response) {
+	fs.readFile("pages/employers.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+
 // Hack because I'm too lazy to put this in css/
 app.route("/styles.css").get(function (request, response) {
 	fs.readFile("styles.css", "utf8", function(err, css) {
