@@ -104,7 +104,6 @@ scrypt_module_factory(function (scrypt) {
                                 var csrngArray = new Uint8Array(32);
                                 window.crypto.getRandomValues(csrngArray);
                                 ephemKey = array2hex(csrngArray);
-                                debugger;
                                 var derivedKey = ec.keyFromPrivate(ephemKey, "hex").derive(userKey.getPublic());
                                 derivedKey = derivedKey.toString(16);
 
@@ -153,7 +152,13 @@ scrypt_module_factory(function (scrypt) {
                                 };
                                 xhr.send(JSON.stringify(dataUpdate));
                             })
-                            .catch(function(err){
+                            .catch(function(err) {
+                                if (err.message === "") {
+                                    // BS no help Crypto API error
+                                    // Probably a wrong password?
+                                    alert("Incorrect password");
+                                    return;
+                                }
                                 throw err;
                             });
                     };
