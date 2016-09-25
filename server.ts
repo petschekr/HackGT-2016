@@ -42,7 +42,11 @@ app.route("/").get(function (request, response) {
         response.send(html);
     });
 });
-app.route("/join").get(function (request, response) {
+app.route("/join").get(common.authenticateMiddleware, function (request, response) {
+    if (response.locals.authenticated) {
+        response.redirect("/setup");
+        return;
+    }
     fs.readFile("pages/create-user-account.html", "utf8", function(err, html) {
         if (err) {
             common.handleError.bind(response);
@@ -51,7 +55,11 @@ app.route("/join").get(function (request, response) {
         response.send(html);
     });
 });
-app.route("/setup").get(function (request, response) {
+app.route("/setup").get(common.authenticateMiddleware, function (request, response) {
+    if (!response.locals.authenticated) {
+        response.redirect("/join");
+        return;
+    }
     fs.readFile("pages/new-user-form.html", "utf8", function(err, html) {
         if (err) {
             common.handleError.bind(response);

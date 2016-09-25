@@ -101,6 +101,9 @@ router.route("/join").post(postParser, function (request, response) {
                 dataIV: iv.toString("hex")
             };
             r.table("users").insert([user]).run(common.db, function(err) {
+                // Set authentication cookie
+                response.clearCookie("username");
+                response.cookie("username", username, common.cookieOptions);
                 response.send({
                     "success": true, "message": "Account successfully created"
                 });
