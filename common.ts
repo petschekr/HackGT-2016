@@ -58,7 +58,6 @@ export var authenticateMiddleware = function (request: express.Request, response
         if (err) throw err;
 		cursor.toArray(function (err, results) {
 			if (err) throw err;
-			console.log(results);
 
 			var user: any = {};
 			var loggedIn: boolean;
