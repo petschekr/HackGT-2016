@@ -77,6 +77,15 @@ app.route("/employer").get(function (request, response) {
         response.send(html);
     });
 });
+app.route("/dashboard").get(function (request, response) {
+	fs.readFile("pages/dashboard.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
 
 // Hack because I'm too lazy to put this in css/
 app.route("/styles.css").get(function (request, response) {
@@ -87,6 +96,17 @@ app.route("/styles.css").get(function (request, response) {
         }
         response.set("Content-Type', 'text/css");
         response.send(css);
+    });
+});
+// Ditto
+app.route("/PanID_Icon.png").get(function (request, response) {
+	fs.readFile("pages/PanID_Icon.png", function(err, img) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.set("Content-Type', 'image/png");
+        response.send(img);
     });
 });
 
