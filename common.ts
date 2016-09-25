@@ -12,12 +12,13 @@ import express = require("express");
 
 export interface User {
 	"username": String;
-	"login": {
-		"hash": string;
-		"rounds": number;
-		"digest": string;
-		"salt": string;
-	};
+	// When signing up, the user signs their username with their private key
+	// The signature and their public key are then sent to the server
+	// The server verifies their message
+	"salt": string;
+	"publicKey": string;
+	"ephemPublicKey": string;
+	"data": string;
 }
 export var keys: {
 	"rethinkdb": {
@@ -37,15 +38,13 @@ export var cookieOptions = {
 
 // RethinkDB database
 import r = require("rethinkdb");
-export var db: r.Connection | null = null;
+export var db: r.Connection;
 r.connect( {host: "localhost", port: 28015, db: "PanID"}, function(err, conn) {
     if (err) throw err;
     db = conn;
 	console.info("Connected to RethinkDB instance");
 });
 
-//var dbRaw = new neo4j.GraphDatabase(`http://${keys.neo4j.username}:${keys.neo4j.password}@${keys.neo4j.server}:7474`);
-//export var db = Promise.promisifyAll(dbRaw);
 export var authenticateMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction): void {
 	if (db === null) {
 		response.locals.authenticated = false;
@@ -67,8 +66,7 @@ export var authenticateMiddleware = function (request: express.Request, response
 				loggedIn = false;
 			}
 			else {
-				user = results[0].user.properties;
-				user.admin = !!user.admin; // Could be true or null
+				user = results[0];
 				loggedIn = true;
 			}
 			response.locals.authenticated = loggedIn;
