@@ -13,10 +13,10 @@ scrypt_module_factory(function (scrypt) {
         var TSAPreCheck = document.getElementById("tsa").value.trim() || null;
         var password = document.getElementById("password").value;
 
-        /*if (!firstName || !lastName || !dateOfBirth || !phoneNumber || !email) {
+        if (!firstName || !lastName || !dateOfBirth || !phoneNumber || !email) {
             alert("Please enter your information");
             return;
-        }*/
+        }
         if (!password) {
             alert("Please enter your password to encrypt and save your information");
             return;
