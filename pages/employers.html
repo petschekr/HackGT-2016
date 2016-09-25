@@ -102,16 +102,21 @@
                         <input class="mdl-textfield__input" type="text" id="privKey">
                         <label class="mdl-textfield__label" for="privKey">Private Key</label>
                     </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="pubKey">
-                        <label class="mdl-textfield__label" for="pubKey">Public Key</label>
-                    </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="keypairgen"> Generate Key Pair</a>
                     </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="textDecrypt">
+                        <label class="mdl-textfield__label" for="textDecrypt">Data to Decrypt</label>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="decryptButton"> Decrypt</a>
+                    </div>
         </div>
-      </main>
-    </div>
+        </form>
+
+
+
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
     <script src="js/elliptic.min.js"></script>
     <script src="js/business.js"></script>
