@@ -75,7 +75,7 @@ scrypt_module_factory(function (scrypt) {
                                     // TODO: actually verify the HMAC
                                     //throw new Error("HMAC verification failed");
                                 }
-                                return window.crypto.subtle.importKey("raw", symmetricKeyArray, {name: "AES-CBC", length: 256}, false, ["encrypt", "decrypt"]); 
+                                return window.crypto.subtle.importKey("raw", symmetricKeyArray, {name: "AES-CBC", length: 256}, false, ["decrypt"]); 
                             })
                             .then(function (symmetricKeyParam) {
                                 symmetricKey = symmetricKeyParam;
@@ -106,23 +106,20 @@ scrypt_module_factory(function (scrypt) {
                                 ephemKey = array2hex(csrngArray);
                                 var derivedKey = ec.keyFromPrivate(ephemKey, "hex").derive(userKey.getPublic());
                                 derivedKey = derivedKey.toString(16);
-
-                                var iv = new Uint8Array(16);
-                                window.crypto.getRandomValues(iv);
-                                dataUpdate.dataIV = array2hex(iv);
-
-                                return crypto.subtle.encrypt({
-                                    name: "AES-CBC",
-                                    length: 256,
-                                    iv: iv
-                                }, symmetricKey, scrypt.encode_utf8(userData));
                                 
-                                //var authTag = crypto.createHmac("sha256", derivedKey).update(encryptedData).digest();
-                                // Must set:
-                                // 
-                                // data: encryptedData,
-                                // dataIV: iv.toString("hex"),
-                                // dataAuthTag: authTag.toString("hex")
+                                return window.crypto.subtle.importKey("raw", hex2array(derivedKey), {name: "AES-CBC", length: 256}, false, ["encrypt"])
+                                    .then(function (symmetricKey2) {
+                                        var iv = new Uint8Array(16);
+                                        window.crypto.getRandomValues(iv);
+                                        dataUpdate.dataIV = array2hex(iv);
+
+                                        return crypto.subtle.encrypt({
+                                            name: "AES-CBC",
+                                            length: 256,
+                                            iv: iv
+                                        }, symmetricKey2, scrypt.encode_utf8(userData));
+                                    });
+                                // TODO: var authTag = crypto.createHmac("sha256", derivedKey).update(encryptedData).digest();
                             })
                             .then(function (encrypted) {
                                 dataUpdate.data = array2hex(new Uint8Array(encrypted));
