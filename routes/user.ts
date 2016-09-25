@@ -60,36 +60,50 @@ router.route("/join").post(postParser, function (request, response) {
         });
         return;
     }
-    // Verify signature
-    var publicKeyPair = ec.keyFromPublic(publicKey, "hex");
-    var signedData = crypto.createHash("sha256").update(username).digest();
-    if (!publicKeyPair.verify(signedData, signature)) {
-        response.status(400).send({
-           "error": "Invalid signature"
-        });
-        return;
-    }
-    // Signature checked out, set up this user with some basic information
-    var data = JSON.stringify({
-        "username": username
-    });
-    var ephemKey = crypto.randomBytes(32);
-    var derivedKey = ec.keyFromPrivate(ephemKey, "hex").derive(publicKeyPair.getPublic());
-    var iv = crypto.randomBytes(16)
-    const cipher = crypto.createCipheriv("id-aes256-GCM", derivedKey, iv);
-    var encryptedData = cipher.update(data, "utf8", "hex");
-    encryptedData += cipher.final("hex");
+    r.table("users").filter({username: username}).run(common.db, function(err, cursor) {
+        if (err) throw err;
+		cursor.toArray(function (err, results) {
+			if (err) throw err;
+            if (results.length !== 0) {
+                response.status(400).send({
+                    "error": "That username is already taken"
+                });
+                return;
+            }
+            
+            // Verify signature
+            var publicKeyPair = ec.keyFromPublic(publicKey, "hex");
+            var signedData = crypto.createHash("sha256").update(username).digest();
+            if (!publicKeyPair.verify(signedData, signature)) {
+                response.status(400).send({
+                "error": "Invalid signature"
+                });
+                return;
+            }
+            // Signature checked out, set up this user with some basic information
+            var data = JSON.stringify({
+                "username": username
+            });
+            var ephemKey = crypto.randomBytes(32);
+            var derivedKey = ec.keyFromPrivate(ephemKey, "hex").derive(publicKeyPair.getPublic());
+            derivedKey = new Buffer(derivedKey.toString(16), "hex");
+            var iv = crypto.randomBytes(16)
+            const cipher = crypto.createCipheriv("id-aes256-GCM", derivedKey, iv);
+            var encryptedData = cipher.update(data, "utf8", "hex");
+            encryptedData += cipher.final("hex");
 
-    var user: User = {
-        username: username,
-        salt: salt,
-        publicKey: publicKey.toString("hex"),
-        ephemPublicKey: publicKey.toString("hex"),
-        data: encryptedData
-    };
-    r.table("users").insert([user]).run(common.db, function(err) {
-        response.send({
-            "success": true, "message": "Account successfully created"
+            var user: User = {
+                username: username,
+                salt: salt,
+                publicKey: publicKey.toString("hex"),
+                ephemPublicKey: publicKey.toString("hex"),
+                data: encryptedData
+            };
+            r.table("users").insert([user]).run(common.db, function(err) {
+                response.send({
+                    "success": true, "message": "Account successfully created"
+                });
+            });
         });
     });
 });

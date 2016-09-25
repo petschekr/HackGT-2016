@@ -25,8 +25,9 @@ app.use(cookieParser(
     common.cookieOptions
 ));
 
-app.use("/css", serveStatic("public/css"));
-app.use("/img", serveStatic("public/img"));
+//app.use("/css", serveStatic("public/css"));
+//app.use("/img", serveStatic("public/img"));
+app.use("/js", serveStatic("js"));
 
 // Routes
 import userRouter = require("./routes/user");
@@ -39,6 +40,26 @@ app.route("/").get(function (request, response) {
             return;
         }
         response.send(html);
+    });
+});
+app.route("/join").get(function (request, response) {
+    fs.readFile("pages/create-user-account.html", "utf8", function(err, html) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.send(html);
+    });
+});
+// Hack because I'm too lazy to put this in css/
+app.route("/styles.css").get(function (request, response) {
+	fs.readFile("styles.css", "utf8", function(err, css) {
+        if (err) {
+            common.handleError.bind(response);
+            return;
+        }
+        response.set("Content-Type', 'text/css");
+        response.send(css);
     });
 });
 
@@ -62,10 +83,18 @@ app.use(function (err: Error, request, response, next) {
 });
 
 const PORT = 80;
+const HTTPS_PORT = 443;
+const httpsOptions = {
+	key: fs.readFileSync("/etc/letsencrypt/live/panid.tech/privkey.pem"),
+	cert: fs.readFileSync("/etc/letsencrypt/live/panid.tech/cert.pem"),
+	ca: fs.readFileSync("/etc/letsencrypt/live/panid.tech/chain.pem"),
+	//secureProtocol: "TLSv1_method"
+	ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!3DES:!MD5:!PSK"
+};
 
-// Set up the Socket.io server
-var server = http.createServer(app).listen(PORT, "0.0.0.0", 511, function () {
-	console.log("HTTP server listening on port " + PORT);
+// Set up the server
+https.createServer(httpsOptions, app).listen(HTTPS_PORT, "0.0.0.0", 511, function () {
+	console.log("HTTPS server listening on port " + HTTPS_PORT);
 });
 
 export = app;
