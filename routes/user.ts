@@ -97,7 +97,8 @@ router.route("/join").post(postParser, function (request, response) {
                 salt: salt,
                 publicKey: publicKey.toString("hex"),
                 ephemPublicKey: publicKey.toString("hex"),
-                data: encryptedData
+                data: encryptedData,
+                dataIV: iv.toString("hex")
             };
             r.table("users").insert([user]).run(common.db, function(err) {
                 response.send({

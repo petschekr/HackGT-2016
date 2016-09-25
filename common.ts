@@ -19,6 +19,7 @@ export interface User {
 	"publicKey": string;
 	"ephemPublicKey": string;
 	"data": string;
+	"dataIV": string;
 }
 export var keys: {
 	"rethinkdb": {
