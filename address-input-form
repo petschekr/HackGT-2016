@@ -64,7 +64,7 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">About Us</span>
+          <span class="mdl-layout-title">Welcome to PanID</span>
           <div class="mdl-layout-spacer"></div>
         </div>
       </header>
@@ -94,11 +94,39 @@
 </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-            <p>Hi, and welcome to PanID.</p>
-            <P>We were founded in September of 2016 at HackGT, a hackathon at Georgia Tech. Our mission is to streamline the process of entering personal information across websites while maintaining the highest security possible. In fact, thanks to our encryption setup, we at PanID can never access your personal data under any circumstances.</P>
-            <P>Thank you very much for using our service and we hope you enjoy it! To get started, click on the menu in the upper left hand side of the screen to navigate the website.</P>
-            <p>Finally, what's the good word?</p>
         </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+            <div class="mdl-card mdl-cell mdl-shadow--3dp" id="text-box" >
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Input Your Credit Card</h2>
+                </div>
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label class="mdl-textfield__label">Select Address Type</label> <br>                      
+                        <input type="radio" name="addressType" value="both" checked> Both <br>         
+                        <input type="radio" name="addressType" value="ship"> Shipping Address <br>
+                        <input type="radio" name="addressType" value="bill"> Billing Address <br>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="street">
+                        <label class="mdl-textfield__label" for="street">Street</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="city">
+                        <label class="mdl-textfield__label" for="city" >City</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="state">
+                        <label class="mdl-textfield__label" for="state">State</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="zip">
+                        <label class="mdl-textfield__label" for="zip">Zip Code</label>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit" href="dashboard.html"> Submit</a>
+                    </div>
+                </form>
       </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
