@@ -67,6 +67,7 @@
           padding: 20px 0;
           margin: -20px 16px;
           width: 90%;
+          height: 67.5px;
       }
       #text-box .mdl-textfield:last-of-type {
           margin-bottom: 0;
@@ -111,27 +112,26 @@
         <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a> -->
     </nav>
 </div>
-        <main class="mdl-layout__content mdl-color--grey-100">
-            <div class="mdl-card mdl-cell mdl-shadow--3dp" id="text-box" >
-                <div class="mdl-card__title">
-              <h2 class="mdl-card__title-text">Authorize Transmission</h2>
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-card mdl-cell mdl-shadow--3dp" id="text-box" >
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Authorize Transmission</h2>
+            </div>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="transPwd">
+                    <label class="mdl-textfield__label" for="transPwd">Password</label><br>
                 </div>
-                <form action="#">
-        <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="transPwd">
-                        <label class="mdl-textfield__label" for="transPwd">Password</label><br>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="transPubKey">
-                        <label class="mdl-textfield__label" for="transPubKey" >Employer Public Key</label><br>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit"> Submit</a>
-                    </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="transPubKey">
+                    <label class="mdl-textfield__label" for="transPubKey" >Employer Public Key</label><br>
+                </div>
+            </form>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit">Submit</a>
+            </div>
         </div>
-      </main>
+    </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
   </body>
