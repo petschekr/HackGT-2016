@@ -48,23 +48,48 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
+   <style>
+      #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+      }
+      #text-box {
+          margin-right: auto;
+          margin-left: auto;
+      }
+      #text-box .mdl-textfield {
+          display: block;
+          padding: 20px 0;
+          margin: -20px 16px;
+          width: 90%;
+      }
+      #text-box .mdl-textfield:last-of-type {
+          margin-bottom: 0;
+      }
+      #text-box .mdl-button {
+          width: 90%;
+          display: block;
+          margin: 0 auto;
+      }
     </style>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Welcome to PanID</span>
+          <span class="mdl-layout-title">Add a Credit Card</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--indigo mdl-color-text--white">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Input Your Address</span>
           <div class="mdl-layout-spacer"></div>
         </div>
       </header>
@@ -78,12 +103,13 @@
                 <span class="visuallyhidden">Accounts</span>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-              <li class="mdl-menu__item">Log Out</li>
+                <li class="mdl-menu__item">Log Out</li>
             </ul>
         </div>
     </header>
     <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
         <a class="mdl-navigation__link" href="home.html"><i class="mdl-color-text--blue-grey-400 material-icons"></i>Home</a>
+        <a class="mdl-navigation__link" href="dashboard.html"><i class="mdl-color-text--blue-grey-400 material-icons"></i>Dashboard</a>
         <a class="mdl-navigation__link" href="credit-card-input.html"><i class="mdl-color-text--blue-grey-400 material-icons" ></i>Add Credit Card</a>
         <a class="mdl-navigation__link" href="passport-input.html"><i class="mdl-color-text--blue-grey-400 material-icons"></i>Add Passport</a>
         <a class="mdl-navigation__link" href="address-input-form.html"><i class="mdl-color-text--blue-grey-400 material-icons"></i>Add Address</a>
@@ -93,9 +119,37 @@
     </nav>
 </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-            <!-- THIS IS WHERE WE PUT CONTENT SHIT -->
-        </div>
+            <div class="mdl-card mdl-cell mdl-shadow--3dp" id="text-box" >
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Input Your Address</h2>
+                </div>
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label class="mdl-textfield__label">Select Address Type</label> <br>                      
+                        <input type="radio" name="addressType" value="both" checked> Both <br>         
+                        <input type="radio" name="addressType" value="ship"> Shipping Address <br>
+                        <input type="radio" name="addressType" value="bill"> Billing Address <br>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="street">
+                        <label class="mdl-textfield__label" for="street">Street</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="city">
+                        <label class="mdl-textfield__label" for="city" >City</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="state">
+                        <label class="mdl-textfield__label" for="state">State</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="zip">
+                        <label class="mdl-textfield__label" for="zip">Zip Code</label>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="submit" href="dashboard.html"> Submit</a>
+                    </div>
+                </form>
       </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
